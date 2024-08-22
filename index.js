@@ -4,9 +4,6 @@ import dotenv from "dotenv";
 import Routes from "./routes/route.js";
 import cors from "cors";
 import bodyParser from "body-parser";
-import path from "path";
-
-const __dirname = path.resolve();
 
 const app = express();
 
@@ -16,21 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/", Routes);
 
-const PORT = process.env.PORT || 8000;
+const PORT = 8000;
 
-app.use(express.static(path.join(__dirname, "./client/build")));
-
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./client/build/index.html"),
-    function (err) {
-      res.status(500).send(err);
-    }
-  );
-});
-
-const username = rasalrahul18;
-const password = DlWCna4T2Q2DgyyF;
+const username = process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
 
 connection(username, password);
 
